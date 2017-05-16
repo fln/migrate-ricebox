@@ -33,17 +33,18 @@ if err != nil {
 Rice boxes can not be loaded by string URL for the following reasons:
 
 1. If there are no calls to `rice.FindBox()` in  the main application **rice**
-command lie tool will not embed directory contents into the main binary. By
-using source URLs call to FinxBox() would be included inside this package
-instead of main application, furthermore function parameter would not be a
-constant string but a variable instead. Application could force **rice** tool to
-embed directory contents by including dummy method invocation like
-`var _ = rice.MustFindBox("dir")` but that would not solve the following issue.
-2. Having `rice.FindBox()` in this module would break development builds where
-directory contents are not embedded to the final binary but read directly from
-the file system. Current `rice.FindBox()` implementation tries to detect name of
-the package that called this method by analyzing stack trace. Package name is
-later used to search for a directory relative to the caller source directory.
+command line tool will not embed directory contents into the main binary. If
+source URL were used then call to FindBox() would be included inside this
+package instead of main application. Application could force **rice** tool to
+embed directory contents by including a dummy method invocation like
+`var _ = rice.MustFindBox("dir")` but that requires manual synchronizations of
+source URL and this extra call.
+2. Having `rice.FindBox()` inside this module would break development builds
+where directory contents are not embedded into the final binary but read
+directly from the file system. Current `rice.FindBox()` implementation tries to
+detect name of the package that called this method by analyzing call stack
+trace. Package name is later used to search for a directory relative to the
+caller source code.
 
 Example usage:
 
