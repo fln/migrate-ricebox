@@ -1,9 +1,11 @@
 package ricebox
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 
 	rice "github.com/GeertJohan/go.rice"
@@ -77,22 +79,22 @@ func (r *Ricebox) Next(version uint) (nextVersion uint, err error) {
 
 func (r *Ricebox) ReadUp(version uint) (io.ReadCloser, string, error) {
 	if m, ok := r.migrations.Up(version); ok {
-		raw, err := r.box.Open(m.Raw)
+		bs, err := r.box.Bytes(m.Raw)
 		if err != nil {
 			return nil, "", err
 		}
-		return raw, m.Identifier, nil
+		return ioutil.NopCloser(bytes.NewBuffer(bs)), m.Identifier, nil
 	}
 	return nil, "", os.ErrNotExist
 }
 
 func (r *Ricebox) ReadDown(version uint) (io.ReadCloser, string, error) {
 	if m, ok := r.migrations.Down(version); ok {
-		raw, err := r.box.Open(m.Raw)
+		bs, err := r.box.Bytes(m.Raw)
 		if err != nil {
 			return nil, "", err
 		}
-		return raw, m.Identifier, nil
+		return ioutil.NopCloser(bytes.NewBuffer(bs)), m.Identifier, nil
 	}
 	return nil, "", os.ErrNotExist
 }
