@@ -9,7 +9,7 @@ import (
 	"os"
 
 	rice "github.com/GeertJohan/go.rice"
-	"github.com/mattes/migrate/source"
+	"github.com/golang-migrate/migrate/source"
 )
 
 type Ricebox struct {

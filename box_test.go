@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	rice "github.com/GeertJohan/go.rice"
-	st "github.com/mattes/migrate/source/testing"
+	st "github.com/golang-migrate/migrate/source/testing"
 )
 
 func TestFS(t *testing.T) {

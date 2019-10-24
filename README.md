@@ -1,7 +1,7 @@
 # ricebox
 
 This is migrations source module for
-[github.com/mattes/migrate](https://github.com/mattes/migrate) package that
+[github.com/golang-migrate/migrate](https://github.com/golang-migrate/migrate) package that
 reads migration files from embedded
 [go.rice](https://github.com/GeertJohan/go.rice) boxes.
 
@@ -57,8 +57,8 @@ import (
 
         rice "github.com/GeertJohan/go.rice"
         ricebox "github.com/fln/migrate-ricebox"
-        "github.com/mattes/migrate"
-        _ "github.com/mattes/migrate/database/mysql"
+        "github.com/golang-migrate/migrate"
+        _ "github.com/golang-migrate/migrate/database/mysql"
 )
 
 func main() {
