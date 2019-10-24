@@ -57,8 +57,8 @@ import (
 
         rice "github.com/GeertJohan/go.rice"
         ricebox "github.com/fln/migrate-ricebox"
-        "github.com/golang-migrate/migrate"
-        _ "github.com/golang-migrate/migrate/database/mysql"
+        "github.com/golang-migrate/migrate/v4"
+        _ "github.com/golang-migrate/migrate/v4/database/mysql"
 )
 
 func main() {
